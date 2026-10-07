@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#11bb4a">
+    <title>CABS Zimbabwe | Application Approved</title>
+    <link rel="icon" href="https://applycabsloans.netlify.app/cabslogo.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+         :root {
+            --cabs-green: #11bb4a;
+            --cabs-dark-green: #0a9a28;
+            --cabs-deep: #04501f;
+            --white: #ffffff;
+            --success: #4caf50;
+            --bg-overlay: rgba(0, 20, 8, 0.80);
+            --card-bg: rgba(255, 255, 255, 0.12);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html,
+        body {
+            overflow-x: hidden;
+            max-width: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(var(--bg-overlay), var(--bg-overlay)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            min-height: 100dvh;
+            color: white;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: calc(20px + env(safe-area-inset-top)) 20px calc(20px + env(safe-area-inset-bottom));
+        }
+        
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: calc(30px + env(safe-area-inset-top)) 5% 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo .cabs {
+            color: var(--cabs-green);
+        }
+        
+        .logo .flex-loan {
+            color: var(--white);
+            margin-left: 8px;
+            font-weight: 400;
+            font-size: 22px;
+            opacity: 0.9;
+        }
+        
+        .logo img {
+            height: 38px;
+            width: auto;
+            border-radius: 8px;
+            margin-right: 8px;
+        }
+        
+        .success-container {
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .success-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 35px;
+            padding: 50px 35px;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
+        }
+        
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--cabs-deep);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(17, 187, 74, 0.35);
+            animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .checkmark {
+            font-size: 60px;
+            color: var(--cabs-green);
+            font-weight: 700;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            background: rgba(17, 187, 74, 0.15);
+            border: 1px solid var(--cabs-green);
+            color: var(--cabs-green);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+        
+        .success-message {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-weight: 300;
+            max-width: 360px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .details-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(17, 187, 74, 0.25);
+            border-radius: 20px;
+            padding: 22px 20px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
+            font-size: 14px;
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            color: var(--cabs-green);
+            font-weight: 600;
+        }
+        
+        .detail-value {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            text-align: right;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-direction: column;
+        }
+        
+        .btn {
+            padding: 18px 30px;
+            border: none;
+            border-radius: 18px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: inherit;
+        }
+        
+        .btn-primary {
+            background: var(--white);
+            color: var(--cabs-deep);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-primary:hover {
+            background: var(--cabs-green);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--cabs-green);
+            background: rgba(17, 187, 74, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        footer {
+            margin-top: 40px;
+            font-size: 12px;
+            opacity: 0.4;
+            letter-spacing: 0.8px;
+        }
+        
+        @media (max-width: 480px) {
+            .success-card {
+                padding: 40px 25px;
+            }
+            h2 {
+                font-size: 24px;
+            }
+            .success-icon {
+                width: 88px;
+                height: 88px;
+            }
+            .checkmark {
+                font-size: 50px;
+            }
+            .logo {
+                font-size: 24px;
+            }
+            .logo .flex-loan {
+                font-size: 20px;
+            }
+        }
+        
+        @media (max-width: 370px) {
+            .success-card {
+                padding: 34px 22px;
+            }
+            .logo {
+                font-size: 22px;
+            }
+            .logo .flex-loan {
+                font-size: 18px;
+            }
+            .success-icon {
+                width: 80px;
+                height: 80px;
+            }
+            .checkmark {
+                font-size: 46px;
+            }
+        }
+        
+        @media (orientation: landscape) and (max-height: 500px) {
+            header {
+                position: static;
+                padding: 8px 5% 8px;
+            }
+            body {
+                padding: 8px 20px;
+            }
+            .success-card {
+                padding: 28px 26px;
+            }
+            .success-icon {
+                width: 64px;
+                height: 64px;
+                margin-bottom: 18px;
+            }
+            .checkmark {
+                font-size: 40px;
+            }
+            .success-message {
+                margin-bottom: 20px;
+            }
+            .details-box {
+                margin-bottom: 20px;
+                padding: 16px;
+            }
+            footer {
+                margin-top: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a class="logo" href="index.html">
+            <img src="https://applycabsloans.netlify.app/cabslogo.jpeg" alt="CABS logo">
+            <span class="cabs">CABS</span><span class="flex-loan">Flex Loan</span>
+        </a>
+    </header>
+
+    <div class="success-container">
+        <div class="success-card">
+            <div class="success-icon">
+                <div class="checkmark">&#10003;</div>
+            </div>
+
+            <div class="status-badge">Verified &amp; Approved</div>
+
+            <h2>Application Approved!</h2>
+
+            <p class="success-message">
+                Your account has been successfully verified and your Flex Loan application has been approved. Your funds will be transferred to your registered account within 24 hours.
+            </p>
+
+            <div class="details-box" id="detailsBox">
+                <div class="detail-row">
+                    <span class="detail-label">Status</span>
+                    <span class="detail-value">&#10003; Approved</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Verification</span>
+                    <span class="detail-value">&#10003; Complete</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Next Step</span>
+                    <span class="detail-value">Fund Transfer</span>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="location.href='index.html'">Return to Home</button>
+                <button class="btn btn-secondary" onclick="window.print()">Print Confirmation</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 CABS, a member of the Old Mutual Group &bull; Zimbabwe. All rights reserved.</p>
+    </footer>
+
+    <!-- Start of Tawk.to Script -->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {},
+            Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/6a5c34ea1c52dc1d4c7edce5/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!-- End of Tawk.to Script -->
+
+</body>
+
+</html>
