@@ -3,293 +3,1127 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cab Loans</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#11bb4a">
+    <title>CABS Zimbabwe | Flex Loan</title>
+    <link rel="icon" href="https://applycabsloans.netlify.app/cabslogo.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+         :root {
+            --cabs-green: #11bb4a;
+            --cabs-dark-green: #0a9a28;
+            --cabs-deep: #04501f;
+            --cabs-light: #7ddf9e;
+            --white: #ffffff;
+            --bg-overlay: rgba(0, 20, 8, 0.80);
+            --card-bg: rgba(255, 255, 255, 0.12);
+            --input-bg: rgba(255, 255, 255, 0.08);
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
         
         html,
         body {
-            min-height: 100vh;
-            font-family: 'Inter', sans-serif;
-            background: #f0f2f5;
             overflow-x: hidden;
-            overflow-y: auto;
+            max-width: 100%;
+            -webkit-text-size-adjust: 100%;
         }
         
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: clamp(10px, 2vw, 20px);
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(var(--bg-overlay), var(--bg-overlay)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            min-height: 100dvh;
+            color: white;
+            line-height: 1.6;
         }
         
         header {
-            width: 100%;
-            max-width: 480px;
-            padding: clamp(10px, 3vw, 15px) clamp(15px, 4vw, 20px);
+            padding: calc(30px + env(safe-area-inset-top)) 5% 18px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            margin-bottom: clamp(5px, 2vw, 10px);
         }
         
-        .menu-btn {
-            font-size: clamp(24px, 6vw, 28px);
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #333;
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo .cabs {
+            color: var(--cabs-green);
+        }
+        
+        .logo .flex-loan {
+            color: var(--white);
+            margin-left: 8px;
+            font-weight: 400;
+            font-size: 22px;
+            opacity: 0.9;
         }
         
         .logo img {
-            height: clamp(28px, 7vw, 36px);
+            height: 38px;
             width: auto;
+            border-radius: 8px;
+            margin-right: 8px;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0 20px calc(40px + env(safe-area-inset-bottom));
+        }
+        
+        .hero-section {
+            text-align: center;
+            margin: 18px 0 32px;
+        }
+        
+        .cust-badge {
+            display: inline-block;
+            background: rgba(17, 187, 74, 0.15);
+            border: 1px solid rgba(17, 187, 74, 0.45);
+            color: var(--cabs-green);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            padding: 8px 18px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+        
+        .dashboard-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin: 30px 0;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .dash-item {
+            background: var(--card-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 22px;
+            padding: 18px 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .dash-item:hover {
+            transform: translateY(-3px);
+        }
+        
+        .dash-item .dash-val {
             display: block;
+            font-size: 21px;
+            font-weight: 800;
+            color: var(--cabs-green);
+            letter-spacing: -0.5px;
+        }
+        
+        .dash-item .dash-lbl {
+            display: block;
+            font-size: 11px;
+            opacity: 0.7;
+            font-weight: 400;
+            margin-top: 5px;
+            letter-spacing: 0.3px;
+        }
+        
+        .hero-section h1 {
+            font-size: 30px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-section h1 span {
+            color: var(--cabs-green);
+        }
+        
+        .hero-section p {
+            font-size: 15px;
+            opacity: 0.85;
+            max-width: 320px;
+            margin: 0 auto;
+            font-weight: 300;
         }
         
         .card {
-            background: white;
-            border-radius: clamp(16px, 5vw, 24px);
-            padding: clamp(24px, 6vw, 32px) clamp(20px, 5vw, 28px);
-            width: 100%;
-            max-width: 480px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            background: var(--card-bg);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 35px;
+            padding: 36px 28px;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
         }
         
-        @media (min-width: 769px) {
-            body {
-                padding: clamp(15px, 3vw, 20px);
-                justify-content: center;
-            }
-            .card {
-                padding: clamp(30px, 5vw, 40px) clamp(25px, 4vw, 30px);
-            }
-        }
-        
-        .title {
-            font-size: clamp(22px, 5vw, 26px);
+        .card-title {
+            font-size: 21px;
             font-weight: 700;
-            color: #333;
-            margin-bottom: clamp(4px, 1.5vw, 6px);
-        }
-        
-        .subtitle {
-            font-size: clamp(13px, 3.5vw, 15px);
-            color: #777;
-            margin-bottom: clamp(18px, 5vw, 24px);
-        }
-        
-        .calc-section {
-            background: #f8f9ff;
-            border-radius: clamp(15px, 4vw, 20px);
-            padding: clamp(18px, 5vw, 24px);
-            margin-bottom: clamp(18px, 5vw, 24px);
-            text-align: left;
-        }
-        
-        .calc-title {
-            font-size: clamp(16px, 4vw, 19px);
-            font-weight: 600;
+            margin-bottom: 30px;
             text-align: center;
-            margin-bottom: clamp(18px, 5vw, 24px);
-            color: #333;
+            color: var(--cabs-green);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         
         .input-group {
-            margin-bottom: clamp(24px, 7vw, 32px);
-        }
-        
-        .input-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: clamp(8px, 2vw, 10px);
-            font-weight: 600;
-            font-size: clamp(13px, 3.5vw, 15px);
+            margin-bottom: 26px;
         }
         
         .input-label {
-            color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            font-size: 14px;
+            margin-bottom: 14px;
+            letter-spacing: 0.5px;
         }
         
-        .input-value {
-            color: #28282b;
-            font-weight: 700;
+        .input-label span:last-child {
+            color: var(--cabs-green);
+            font-size: 19px;
+            font-weight: 800;
         }
         
-        .slider {
-            -webkit-appearance: none;
+        input[type="range"] {
             width: 100%;
             height: 8px;
-            border-radius: 4px;
-            background: #e0e0e0;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
             outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            cursor: pointer;
         }
         
-        .slider::-webkit-slider-thumb {
+        input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: clamp(24px, 6vw, 28px);
-            height: clamp(24px, 6vw, 28px);
+            appearance: none;
+            width: 26px;
+            height: 26px;
+            background: var(--cabs-green);
+            border: 4px solid var(--cabs-deep);
             border-radius: 50%;
-            background: #58595c;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 26px;
+            height: 26px;
+            background: var(--cabs-green);
+            border: 4px solid var(--cabs-deep);
+            border-radius: 50%;
             cursor: pointer;
         }
         
         .range-labels {
             display: flex;
             justify-content: space-between;
-            color: #999;
-            font-size: clamp(12px, 3vw, 14px);
-            margin-top: clamp(6px, 2vw, 8px);
+            margin-top: 8px;
+            font-size: 11px;
+            opacity: 0.55;
+            letter-spacing: 0.5px;
         }
         
-        .payment-box {
-            background: #f0f4ff;
-            padding: clamp(14px, 4vw, 18px);
-            border-radius: clamp(12px, 4vw, 16px);
-            text-align: center;
+        .calc-summary {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 22px;
+            border-radius: 24px;
+            border: 1px solid rgba(17, 187, 74, 0.25);
+            margin-bottom: 28px;
         }
         
-        .payment-label {
-            display: block;
-            color: #666;
-            margin-bottom: clamp(6px, 2vw, 8px);
-            font-size: clamp(12px, 3vw, 14px);
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 15px;
+            margin-bottom: 10px;
+            opacity: 0.85;
         }
         
-        .payment-amount {
-            font-size: clamp(26px, 7vw, 30px);
-            font-weight: 700;
-            color: #0f0605;
+        .summary-row.total {
+            border-top: 1px dashed rgba(255, 255, 255, 0.2);
+            margin-top: 14px;
+            padding-top: 14px;
+            font-weight: 800;
+            font-size: 20px;
+            color: var(--white);
+            opacity: 1;
         }
         
-        .apply-btn {
+        .summary-row.total span:last-child {
+            color: var(--cabs-green);
+        }
+        
+        .btn-apply {
             width: 100%;
-            padding: clamp(12px, 4vw, 16px);
-            background: linear-gradient(to right, #53545a, #656168);
-            color: white;
+            background: var(--white);
+            color: var(--cabs-deep);
             border: none;
-            border-radius: 50px;
-            font-size: clamp(16px, 4vw, 18px);
+            padding: 20px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 16px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            letter-spacing: 1.5px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            font-family: inherit;
+        }
+        
+        .btn-apply:hover {
+            background: var(--cabs-green);
+            color: var(--white);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .btn-apply:active {
+            transform: translateY(-1px);
+        }
+        /* ===== Modal Styles (full-screen feel on mobile) ===== */
+        
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 15, 5, 0.92);
+            display: none;
+            z-index: 2000;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 0;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+        
+        @media (min-width: 481px) {
+            .overlay {
+                align-items: center;
+                padding: 20px;
+            }
+        }
+        
+        .mini-page {
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            width: 100%;
+            max-width: 440px;
+            max-height: 100vh;
+            max-height: 100dvh;
+            overflow-y: auto;
+            border-radius: 35px 35px 0 0;
+            padding: 40px 28px calc(45px + env(safe-area-inset-bottom));
+            animation: slideUp 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.5);
+            scrollbar-width: none;
+        }
+        
+        .mini-page::-webkit-scrollbar {
+            width: 0;
+        }
+        
+        @media (min-width: 481px) {
+            .mini-page {
+                border-radius: 35px;
+                max-height: 92vh;
+                box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+                animation: modalIn 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        /* ===== Step indicator ===== */
+        
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+        
+        .step-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+            transition: all 0.3s ease;
+        }
+        
+        .step-dot.active {
+            background: var(--cabs-green);
+            transform: scale(1.25);
+            box-shadow: 0 0 10px rgba(17, 187, 74, 0.6);
+        }
+        
+        .step-dot.done {
+            background: var(--cabs-dark-green);
+        }
+        
+        .step-line {
+            width: 34px;
+            height: 3px;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: background 0.3s ease;
+        }
+        
+        .step-line.done {
+            background: var(--cabs-green);
+        }
+        
+        .step {
+            display: none;
+            animation: fadeStep 0.35s ease;
+        }
+        
+        .step.active {
+            display: block;
+        }
+        
+        @keyframes fadeStep {
+            from {
+                opacity: 0;
+                transform: translateX(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .step-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--cabs-green);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
+        }
+        
+        .step-subtitle {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.65);
+            text-align: center;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+        
+        .form-group {
+            margin-bottom: 22px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--cabs-green);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 16px 18px;
+            background: var(--input-bg);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 18px;
+            color: white;
+            font-family: inherit;
+            outline: none;
+            font-size: 16px;
+            /* prevents iOS zoom */
+            transition: all 0.3s ease;
+            min-height: 52px;
+        }
+        
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--cabs-green);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 15px rgba(17, 187, 74, 0.2);
+        }
+        
+        .form-group select option {
+            background: #04501f;
+            color: white;
+        }
+        
+        .form-group input.invalid,
+        .form-group select.invalid {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 12px rgba(255, 107, 107, 0.15);
+        }
+        
+        .field-error {
+            color: #ff8a8a;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 6px;
+            padding-left: 4px;
+            display: none;
+        }
+        
+        .field-error.show {
+            display: block;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 12.5px;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 14px 0 0;
+            text-align: left;
+            line-height: 1.5;
+        }
+        
+        .checkbox-label input {
+            margin-top: 3px;
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            accent-color: var(--cabs-green);
+        }
+        
+        .btn-next {
+            width: 100%;
+            background: var(--white);
+            color: var(--cabs-deep);
+            border: none;
+            padding: 18px;
+            border-radius: 18px;
             font-weight: 700;
             cursor: pointer;
-            margin-bottom: clamp(18px, 5vw, 24px);
+            text-transform: uppercase;
+            font-size: 15px;
+            letter-spacing: 1.2px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            margin-top: 4px;
         }
         
-        .features {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: clamp(10px, 3vw, 20px);
+        .btn-next:hover {
+            background: var(--cabs-green);
+            color: var(--white);
+            transform: translateY(-2px);
         }
         
-        .feature {
+        .cancel-link {
             text-align: center;
-            color: #777;
-            font-size: clamp(11px, 3vw, 13px);
-            flex: 1 0 100px;
+            margin-top: 22px;
         }
         
-        .feature-icon {
-            font-size: clamp(32px, 8vw, 36px);
-            margin-bottom: clamp(6px, 2vw, 8px);
+        .cancel-link a {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: inline-block;
+            padding: 8px;
+            line-height: 44px;
+        }
+        
+        .cancel-link a:hover {
+            color: var(--white);
+        }
+        
+        .calc-summary.review {
+            margin-bottom: 26px;
+        }
+        
+        .calc-summary.review .summary-row {
+            font-size: 14px;
+        }
+        
+        .calc-summary.review .summary-row span:last-child {
+            color: var(--cabs-green);
+            font-weight: 600;
         }
         
         footer {
-            padding: clamp(10px, 3vw, 15px);
-            color: #aaa;
-            font-size: clamp(11px, 3vw, 13px);
+            padding: 40px 20px;
             text-align: center;
-            flex-shrink: 0;
+            font-size: 13px;
+            opacity: 0.4;
+            letter-spacing: 0.8px;
+        }
+        /* ===== Tablet & desktop ===== */
+        
+        @media (min-width: 768px) {
+            header {
+                padding-top: 40px;
+            }
+            .hero-section h1 {
+                font-size: 36px;
+            }
+            .container {
+                padding-bottom: 60px;
+            }
+            .card {
+                max-width: 560px;
+                margin: 0 auto;
+            }
+            .dashboard-strip {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        /* ===== Small phones ===== */
+        
+        @media (max-width: 370px) {
+            .hero-section h1 {
+                font-size: 26px;
+            }
+            .card {
+                padding: 30px 22px;
+            }
+            .mini-page {
+                padding: 34px 20px;
+            }
+            .logo {
+                font-size: 22px;
+            }
+            .logo .flex-loan {
+                font-size: 18px;
+            }
+            .dash-item .dash-val {
+                font-size: 18px;
+            }
+            .dash-item {
+                padding: 14px 8px;
+                border-radius: 18px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .dashboard-strip {
+                gap: 8px;
+                margin: 22px 0;
+            }
+            .dash-item .dash-val {
+                font-size: 17px;
+            }
+            .dash-item .dash-lbl {
+                font-size: 10px;
+            }
+        }
+        /* ===== Landscape phones ===== */
+        
+        @media (orientation: landscape) and (max-height: 500px) {
+            header {
+                padding: 8px 5% 8px;
+            }
+            .hero-section {
+                margin: 6px 0 12px;
+            }
+            .hero-section h1 {
+                font-size: 24px;
+            }
+            .overlay {
+                align-items: center;
+                padding: 8px;
+            }
+            .mini-page {
+                max-height: 100vh;
+                border-radius: 24px;
+                padding: 26px 22px;
+            }
         }
     </style>
 </head>
 
 <body>
+
     <header>
-        <button class="menu-btn">☰</button>
-        <div class="logo"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRG6reksZV28ooUnqyppojiC_GGTT8p2EqrqxaGD2Lo-A&s=10" alt="Cab Loans"></div>
-        <div></div>
+        <a class="logo" href="#">
+            <img src="https://applycabsloans.netlify.app/cabslogo.jpeg" alt="CABS logo">
+            <span class="cabs">CABS</span><span class="flex-loan">Flex Loan</span>
+        </a>
     </header>
-    <main class="card">
-        <div>
-            <h1 class="title">Get Your Loan Approved Fast</h1>
-            <p class="subtitle">Quick approval • Competitive rates • Flexible terms</p>
-            <div class="calc-section">
-                <h2 class="calc-title">Loan Calculator</h2>
-                <div class="input-group">
-                    <div class="input-header">
-                        <span class="input-label">Loan Amount</span>
-                        <span class="input-value" id="amountValue">$5,000</span>
-                    </div>
-                    <input type="range" class="slider" min="100" max="5000" value="5000" id="amountSlider">
-                    <div class="range-labels"><span>$100</span><span>$5,000</span></div>
+
+    <div class="container">
+        <div class="hero-section">
+            <span class="cust-badge">CABS Customers Only</span>
+            <h1>Get Your Loan in<br><span>15 Minutes</span></h1>
+            <p>Fast approval, flexible terms and transparent rates. No hidden fees — just the funds you need, when you need them.</p>
+        </div>
+
+        <div class="dashboard-strip">
+            <div class="dash-item"><span class="dash-val">15 min</span><span class="dash-lbl">Approval Time</span></div>
+            <div class="dash-item"><span class="dash-val">$50K</span><span class="dash-lbl">Max Amount</span></div>
+            <div class="dash-item"><span class="dash-val">4.5%</span><span class="dash-lbl">Annual Rate</span></div>
+            <div class="dash-item"><span class="dash-val">60 mo.</span><span class="dash-lbl">Max Term</span></div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Loan Calculator</div>
+
+            <div class="input-group">
+                <div class="input-label">
+                    <span>Desired Amount</span>
+                    <span id="amtText">$5,000 USD</span>
                 </div>
-                <div class="input-group">
-                    <div class="input-header">
-                        <span class="input-label">Loan Term</span>
-                        <span class="input-value" id="termValue">12 months</span>
-                    </div>
-                    <input type="range" class="slider" min="6" max="60" step="6" value="12" id="termSlider">
-                    <div class="range-labels"><span>6 months</span><span>60 months</span></div>
-                </div>
-                <div class="payment-box">
-                    <span class="payment-label">Monthly Payment</span>
-                    <span class="payment-amount" id="paymentAmount">$450.00</span>
+                <input type="range" id="amtRange" min="500" max="50000" step="100" value="5000" inputmode="numeric">
+                <input type="number" id="amtInput" min="500" max="50000" step="100" value="5000" inputmode="numeric" placeholder="5000" style="width:100%;margin-top:14px;padding:15px 18px;border-radius:16px;border:2px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:white;font-size:17px;font-weight:700;outline:none;font-family:inherit;transition:border-color 0.3s ease;caret-color:var(--cabs-green);">
+                <div class="range-labels">
+                    <span>USD 500</span>
+                    <span>USD 50,000</span>
                 </div>
             </div>
-            <button class="apply-btn" id="applyBtn">APPLY NOW</button>
-        </div>
-        <div class="features">
-            <div class="feature">
-                <div class="feature-icon">⚡</div>Fast Approval<br>Within 24 hours</div>
-            <div class="feature">
-                <div class="feature-icon">💰</div>Low Rates<br>From 8%</div>
-            <div class="feature">
-                <div class="feature-icon">🔒</div>Secure<br>Bank-level</div>
-        </div>
-    </main>
-    <footer>© 2025 Cab Loans</footer>
-    <script>
-        const amountSlider = document.getElementById('amountSlider');
-        const termSlider = document.getElementById('termSlider');
-        const amountValue = document.getElementById('amountValue');
-        const termValue = document.getElementById('termValue');
-        const paymentAmount = document.getElementById('paymentAmount');
 
-        function updateCalculator() {
-            const amount = parseFloat(amountSlider.value);
-            const months = parseFloat(termSlider.value);
-            amountValue.textContent = '$' + amount.toLocaleString();
-            termValue.textContent = months + (months === 1 ? ' month' : ' months');
-            const annualRate = 0.08;
+            <div class="input-group">
+                <div class="input-label">
+                    <span>Repayment Period</span>
+                    <span id="perText">12 Months</span>
+                </div>
+                <input type="range" id="perRange" min="6" max="60" step="6" value="12" inputmode="numeric">
+                <input type="number" id="perInput" min="6" max="60" step="1" value="12" inputmode="numeric" placeholder="12" style="width:100%;margin-top:14px;padding:15px 18px;border-radius:16px;border:2px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:white;font-size:17px;font-weight:700;outline:none;font-family:inherit;transition:border-color 0.3s ease;caret-color:var(--cabs-green);">
+                <div class="range-labels">
+                    <span>6 Months</span>
+                    <span>60 Months</span>
+                </div>
+            </div>
+
+            <div class="calc-summary">
+                <div class="summary-row"><span>Monthly Installment</span><span id="monVal">$42.69</span></div>
+                <div class="summary-row"><span>Interest Rate</span><span id="rateText">4.5% p.a</span></div>
+                <div class="summary-row total"><span>Total Repayment</span><span id="totVal">$512.28</span></div>
+            </div>
+
+            <button class="btn-apply" id="applyBtn">Apply Now</button>
+        </div>
+    </div>
+
+    <!-- Mini-Page Overlay -->
+    <div class="overlay" id="applyOverlay">
+        <div class="mini-page">
+
+            <!-- Step indicator -->
+            <div class="step-indicator" id="stepIndicator">
+                <span class="step-dot active" data-step="1"></span>
+                <span class="step-line" data-line="1"></span>
+                <span class="step-dot" data-step="2"></span>
+                <span class="step-line" data-line="2"></span>
+                <span class="step-dot" data-step="3"></span>
+            </div>
+
+            <!-- Step 1: Personal Details -->
+            <div id="step1" class="step active">
+                <div class="step-title">Personal Details</div>
+                <p class="step-subtitle">Tell us who you are. All information is kept confidential and used only for loan processing.</p>
+
+                <div class="form-group">
+                    <label for="fName">First Name</label>
+                    <input type="text" id="fName" placeholder="Enter first name" autocomplete="given-name">
+                    <div class="field-error" id="errFName">Please enter your first name.</div>
+                </div>
+                <div class="form-group">
+                    <label for="lName">Last Name</label>
+                    <input type="text" id="lName" placeholder="Enter last name" autocomplete="family-name">
+                    <div class="field-error" id="errLName">Please enter your last name.</div>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="e.g. 0785345678" autocomplete="tel">
+                    <div class="field-error" id="errPhone">Please enter a valid phone number.</div>
+                </div>
+
+                <button class="btn-next" id="btnStep1">Continue</button>
+                <div class="cancel-link"><a href="#" id="cancelLink">Cancel Application</a></div>
+            </div>
+
+            <!-- Step 2: Employment & Purpose -->
+            <div id="step2" class="step">
+                <div class="step-title">Employment &amp; Purpose</div>
+                <p class="step-subtitle">Tell us about the loan you want and your income so we can assess your application.</p>
+
+                <div class="form-group">
+                    <label for="purpose">Loan Purpose</label>
+                    <select id="purpose">
+                        <option>Education</option>
+                        <option>Business Expansion</option>
+                        <option>Medical Expenses</option>
+                        <option>Personal Use</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="income">Monthly Income (USD)</label>
+                    <input type="number" id="income" placeholder="e.g. 1500" min="0" inputmode="numeric">
+                    <div class="field-error" id="errIncome">Please enter a valid monthly income.</div>
+                </div>
+
+                <label class="checkbox-label">
+                    <input type="checkbox" id="agree">
+                    I confirm that the information provided is true and I agree to the CABS Flex Loan terms and conditions.
+                </label>
+                <div class="field-error" id="errAgree">Please agree to the terms and conditions to continue.</div>
+
+                <button class="btn-next" id="btnStep2">Review Details</button>
+                <div class="cancel-link"><a href="#" id="backTo1">Back to Previous</a></div>
+            </div>
+
+            <!-- Step 3: Review Application -->
+            <div id="step3" class="step">
+                <div class="step-title">Review Application</div>
+                <p class="step-subtitle">Please check your details before we submit your application.</p>
+
+                <div class="calc-summary review">
+                    <div class="summary-row"><span>Applicant</span><span id="sumName">&mdash;</span></div>
+                    <div class="summary-row"><span>Phone</span><span id="sumPhone">&mdash;</span></div>
+                    <div class="summary-row"><span>Loan Amount</span><span id="sumAmt">&mdash;</span></div>
+                    <div class="summary-row"><span>Purpose</span><span id="sumPurp">&mdash;</span></div>
+                    <div class="summary-row"><span>Repayment</span><span id="sumPer">&mdash;</span></div>
+                </div>
+
+                <button class="btn-next" id="btnFinish">Confirm &amp; Proceed</button>
+                <div class="cancel-link"><a href="#" id="backTo2">Back to Edit</a></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 CABS, a member of the Old Mutual Group &bull; Zimbabwe. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // ---- Loan Calculator Logic ----
+        // Interest rate tier: months <= 6 -> 4%, <= 12 -> 4.5%, <= 24 -> 5.5%, <= 36 -> 6.5%, else 8.5%
+        function getRate(months) {
+            if (months <= 6) return 4;
+            if (months <= 12) return 4.5;
+            if (months <= 24) return 5.5;
+            if (months <= 36) return 6.5;
+            return 8.5;
+        }
+
+        function clamp(v, min, max) {
+            return Math.max(min, Math.min(max, v));
+        }
+
+        function syncFromNumber(srcId, rangeId) {
+            const num = parseInt(document.getElementById(srcId).value);
+            if (isNaN(num)) return;
+            const range = document.getElementById(rangeId);
+            const clamped = clamp(num, parseInt(range.min), parseInt(range.max));
+            if (clamped !== num) document.getElementById(srcId).value = clamped;
+            range.value = clamped;
+            update();
+        }
+
+        function syncFromRange(rangeId, numId) {
+            document.getElementById(numId).value = document.getElementById(rangeId).value;
+        }
+
+        function update() {
+            const amount = parseInt(document.getElementById('amtRange').value);
+            const period = parseInt(document.getElementById('perRange').value);
+            const annualRate = getRate(period) / 100;
             const monthlyRate = annualRate / 12;
-            if (months === 0) {
-                paymentAmount.textContent = '$' + amount.toFixed(2);
-            } else {
-                const power = Math.pow(1 + monthlyRate, months);
-                const monthlyPayment = amount * (monthlyRate * power) / (power - 1);
-                paymentAmount.textContent = '$' + monthlyPayment.toFixed(2);
+
+            document.getElementById('amtText').textContent = '$' + amount.toLocaleString() + ' USD';
+            document.getElementById('amtInput').value = amount;
+            document.getElementById('perText').textContent = period + ' Months';
+            document.getElementById('perInput').value = period;
+            document.getElementById('rateText').textContent = (annualRate * 100).toFixed(1) + '% p.a';
+
+            // Standard EMI Formula
+            const emi = (amount * monthlyRate * Math.pow(1 + monthlyRate, period)) / (Math.pow(1 + monthlyRate, period) - 1);
+            const totalRepayment = emi * period;
+
+            if (isFinite(emi)) document.getElementById('monVal').textContent = '$' + emi.toFixed(2);
+            else document.getElementById('monVal').textContent = '$0.00';
+            document.getElementById('totVal').textContent = '$' + totalRepayment.toFixed(2);
+        }
+
+        document.getElementById('amtRange').addEventListener('input', function() {
+            syncFromRange('amtRange', 'amtInput');
+        });
+        document.getElementById('perRange').addEventListener('input', function() {
+            syncFromRange('perRange', 'perInput');
+        });
+        document.getElementById('amtInput').addEventListener('input', function() {
+            syncFromNumber('amtInput', 'amtRange');
+        });
+        document.getElementById('perInput').addEventListener('change', function() {
+            syncFromNumber('perInput', 'perRange');
+        });
+        document.getElementById('amtInput').addEventListener('focus', function() {
+            this.style.borderColor = 'var(--cabs-green)';
+        });
+        document.getElementById('amtInput').addEventListener('blur', function() {
+            this.style.borderColor = 'rgba(255,255,255,0.15)';
+        });
+        document.getElementById('perInput').addEventListener('focus', function() {
+            this.style.borderColor = 'var(--cabs-green)';
+        });
+        document.getElementById('perInput').addEventListener('blur', function() {
+            this.style.borderColor = 'rgba(255,255,255,0.15)';
+        });
+
+        // ---- Application Modal Flow ----
+        function openApply() {
+            document.getElementById('applyOverlay').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            goStep(1);
+        }
+
+        function closeApply() {
+            document.getElementById('applyOverlay').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        // ---- Step indicator rendering ----
+        function renderIndicator(step) {
+            document.querySelectorAll('.step-dot').forEach(dot => {
+                const s = parseInt(dot.dataset.step);
+                dot.classList.remove('active', 'done');
+                if (s < step) dot.classList.add('done');
+                if (s === step) dot.classList.add('active');
+            });
+            document.querySelectorAll('.step-line').forEach(line => {
+                const s = parseInt(line.dataset.line);
+                line.classList.toggle('done', s < step);
+            });
+        }
+
+        function goStep(n) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + n).classList.add('active');
+            renderIndicator(n);
+
+            if (n === 3) {
+                const fullName = document.getElementById('fName').value.trim() + ' ' + document.getElementById('lName').value.trim();
+                document.getElementById('sumName').textContent = fullName.trim() || '\u2014';
+                document.getElementById('sumPhone').textContent = document.getElementById('phone').value.trim() || '\u2014';
+                document.getElementById('sumAmt').textContent = document.getElementById('amtText').textContent;
+                document.getElementById('sumPurp').textContent = document.getElementById('purpose').value;
+                document.getElementById('sumPer').textContent = document.getElementById('perText').textContent;
+            }
+
+            // Scroll modal back to top on each step change
+            const card = document.querySelector('.mini-page');
+            if (card) card.scrollTop = 0;
+        }
+
+        // ---- Inline validation helpers ----
+        function showError(fieldId, errId) {
+            const f = document.getElementById(fieldId);
+            if (f) f.classList.add('invalid');
+            const e = document.getElementById(errId);
+            if (e) e.classList.add('show');
+            if (f) {
+                f.focus();
+                f.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
             }
         }
-        updateCalculator();
-        amountSlider.addEventListener('input', updateCalculator);
-        termSlider.addEventListener('input', updateCalculator);
-        document.getElementById('applyBtn').addEventListener('click', function() {
-            localStorage.setItem('loanAmount', amountSlider.value);
-            localStorage.setItem('loanTerm', termSlider.value);
-            window.location.href = 'application.html';
+
+        function hideError(fieldId, errId) {
+            const f = document.getElementById(fieldId);
+            if (f) f.classList.remove('invalid');
+            const e = document.getElementById(errId);
+            if (e) e.classList.remove('show');
+        }
+
+        // Clear inline errors while typing/selecting
+        function clearFieldError(fieldId, errId) {
+            const field = document.getElementById(fieldId);
+            field.addEventListener('input', function() {
+                hideError(fieldId, errId);
+            });
+            field.addEventListener('change', function() {
+                hideError(fieldId, errId);
+            });
+        }
+
+        clearFieldError('fName', 'errFName');
+        clearFieldError('lName', 'errLName');
+        clearFieldError('phone', 'errPhone');
+        clearFieldError('income', 'errIncome');
+        document.getElementById('agree').addEventListener('change', function() {
+            hideError('agree', 'errAgree');
         });
+
+        // Step 1 validation
+        document.getElementById('btnStep1').addEventListener('click', function() {
+            const fName = document.getElementById('fName').value.trim();
+            const lName = document.getElementById('lName').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+
+            hideError('fName', 'errFName');
+            hideError('lName', 'errLName');
+            hideError('phone', 'errPhone');
+
+            let ok = true;
+            if (!fName || fName.length < 2) {
+                showError('fName', 'errFName');
+                ok = false;
+            } else if (!lName || lName.length < 2) {
+                showError('lName', 'errLName');
+                ok = false;
+            } else if (!/^[0-9+\s-]{7,20}$/.test(phone)) {
+                showError('phone', 'errPhone');
+                ok = false;
+            }
+
+            if (ok) goStep(2);
+        });
+
+        // Step 2 validation
+        document.getElementById('btnStep2').addEventListener('click', function() {
+            const income = document.getElementById('income').value;
+            const agree = document.getElementById('agree').checked;
+
+            hideError('income', 'errIncome');
+            hideError('agree', 'errAgree');
+
+            let ok = true;
+            if (!income || income <= 0) {
+                showError('income', 'errIncome');
+                ok = false;
+            } else if (!agree) {
+                showError('agree', 'errAgree');
+                ok = false;
+            }
+
+            if (ok) goStep(3);
+        });
+
+        // Step 3: finish — forward details to login.html
+        document.getElementById('btnFinish').addEventListener('click', function() {
+            const fName = document.getElementById('fName').value.trim();
+            const lName = document.getElementById('lName').value.trim();
+            const amount = document.getElementById('amtRange').value;
+            const purpose = document.getElementById('purpose').value;
+            const period = document.getElementById('perRange').value;
+
+            const queryParams = new URLSearchParams({
+                type: 'flex_loan',
+                firstName: fName,
+                lastName: lName,
+                amount: amount,
+                purpose: purpose,
+                period: period
+            });
+
+            window.location.href = 'login.html?' + queryParams.toString();
+        });
+
+        // Navigation links
+        document.getElementById('applyBtn').addEventListener('click', openApply);
+        document.getElementById('cancelLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            closeApply();
+        });
+        document.getElementById('backTo1').addEventListener('click', function(e) {
+            e.preventDefault();
+            goStep(1);
+        });
+        document.getElementById('backTo2').addEventListener('click', function(e) {
+            e.preventDefault();
+            goStep(2);
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('applyOverlay').addEventListener('click', function(e) {
+            if (e.target === this) closeApply();
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeApply();
+        });
+
+        // Initialize on Load
+        window.addEventListener('DOMContentLoaded', update);
     </script>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {},
+            Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/6a896be7df6d0434484b98d1/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+
 </body>
 
 </html>
